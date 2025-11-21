@@ -1,0 +1,52 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  linux:
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        perl: ['5.30', '5.32', '5.34', '5.36', '5.38', '5.40', '5.42']
+
+    name: Perl ${{ matrix.perl }} on Ubuntu
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Perl
+        uses: shogo82148/actions-setup-perl@v1
+        with:
+          perl-version: ${{ matrix.perl }}
+          install-modules: false
+
+      - name: Install system dependencies (libjsonnet)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            build-essential \
+            pkg-config \
+            jsonnet \
+            libjsonnet-dev
+
+      - name: Install cpanm
+        run: |
+          curl -L https://cpanmin.us | perl - App::cpanminus
+
+      - name: Install Perl dependencies
+        run: |
+          cpanm --notest --installdeps .
+
+      - name: Build
+        run: |
+          perl Makefile.PL
+          make
+
+      - name: Run tests
+        run: |
+          make test
