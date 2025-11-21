@@ -36,7 +36,11 @@ typedef struct PerlJsonnetVm {
 static void
 free_import_ctx(PerlJsonnetVm *pvm) {
     if (pvm->import_ctx) {
-        dTHXa(pvm->import_ctx->perl);   /* <- добавили контекст */
+#ifdef PERL_IMPLICIT_CONTEXT
+        dTHXa(pvm->import_ctx->perl);
+#else
+        dTHX;
+#endif
         SvREFCNT_dec(pvm->import_ctx->cb);
         Safefree(pvm->import_ctx);
         pvm->import_ctx = NULL;
@@ -54,7 +58,11 @@ free_native_ctxs(PerlJsonnetVm *pvm) {
             Safefree(cur->params);
         }
 
-        dTHXa(cur->perl);              /* <- добавили контекст */
+#ifdef PERL_IMPLICIT_CONTEXT
+        dTHXa(cur->perl);
+#else
+        dTHX;
+#endif
         SvREFCNT_dec(cur->cb);
 
         Safefree(cur);
@@ -72,8 +80,12 @@ perl_jsonnet_import_cb(void *vctx, const char *base, const char *rel,
                        char **found_here, char **buf, size_t *buflen)
 {
     PerlImportCtx *ctx = (PerlImportCtx*)vctx;
+#ifdef PERL_IMPLICIT_CONTEXT
     dTHXa(ctx->perl);
-	dSP;  /* <- НУЖНО */
+#else
+    dTHX;
+#endif
+    dSP;
 
     int ok = 0;
     SV *cb = ctx->cb;
@@ -234,8 +246,12 @@ static struct JsonnetJsonValue*
 perl_jsonnet_native_cb(void *vctx, const struct JsonnetJsonValue *const *argv, int *success)
 {
     NativeCtx *ctx = (NativeCtx*)vctx;
+#ifdef PERL_IMPLICIT_CONTEXT
     dTHXa(ctx->perl);
-	dSP;  /* <- НУЖНО */
+#else
+    dTHX;
+#endif
+    dSP;
 
     ENTER; SAVETMPS;
     PUSHMARK(SP);
@@ -534,7 +550,11 @@ CODE:
 
     Newxz(pvm->import_ctx, 1, PerlImportCtx);
     pvm->import_ctx->vm   = pvm->vm;
+#ifdef PERL_IMPLICIT_CONTEXT
     pvm->import_ctx->perl = aTHX;
+#else
+    pvm->import_ctx->perl = NULL;
+#endif
     pvm->import_ctx->cb   = SvREFCNT_inc(coderef);
 
     jsonnet_import_callback(pvm->vm, perl_jsonnet_import_cb, pvm->import_ctx);
@@ -556,7 +576,11 @@ CODE:
 
     Newxz(ctx, 1, NativeCtx);
     ctx->vm   = pvm->vm;
+#ifdef PERL_IMPLICIT_CONTEXT
     ctx->perl = aTHX;
+#else
+    ctx->perl = NULL;
+#endif
     ctx->cb   = SvREFCNT_inc(coderef);
     ctx->argc = (int)n;
 
