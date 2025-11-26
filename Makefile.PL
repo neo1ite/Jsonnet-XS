@@ -3,7 +3,6 @@ use warnings;
 use ExtUtils::MakeMaker;
 
 use Getopt::Long;
-use Devel::CheckLib;
 # perl Makefile.PL -d to enable -g flag for gdb.
 Getopt::Long::Configure('pass_through');
 GetOptions(
@@ -26,19 +25,6 @@ else {
     chomp($pc_libs, $pc_cflags);
     $inc  = $pc_cflags if $pc_cflags;
     $libs = $pc_libs   if $pc_libs;
-}
-
-BEGIN {
-    eval { require Devel::CheckLib; 1 } or do {
-        warn "Devel::CheckLib is not installed; skipping pre-check for libjsonnet\n";
-    };
-}
-
-if (Devel::CheckLib->can('check_lib')) {
-    Devel::CheckLib::check_lib_or_exit(
-        lib => 'jsonnet',
-        header => 'libjsonnet.h',
-    );
 }
 
 WriteMakefile(
@@ -65,10 +51,6 @@ WriteMakefile(
 
     OBJECT             => '$(O_FILES)',
     OPTIMIZE           => $DEBUG ? '-g' : '-O2',
-    CONFIGURE_REQUIRES => {
-        'ExtUtils::MakeMaker' => 0,
-        'Devel::CheckLib'     => 0,
-    },
 
     META_MERGE => {
         'meta-spec' => { version => 2 },  # CPAN Meta Spec v2 :contentReference[oaicite:1]{index=1}
