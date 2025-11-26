@@ -207,9 +207,13 @@ Register a C<std.native($name)> callback.
 C<@params> is the list of parameter names as used by Jsonnet.
 
 =head2 max_stack($n)
+
 =head2 gc_min_objects($n)
+
 =head2 gc_growth_trigger($factor)
+
 =head2 max_trace($n)
+
 =head2 string_output($bool)
 
 VM tuning options. See libjsonnet documentation for details.
