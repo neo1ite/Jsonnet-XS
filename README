@@ -1,4 +1,4 @@
-JSON-Jsonnet version 0.00_01
+Jsonnet-XS version 0.00_03
 ============================
 
 The README is used to introduce the module and provide instructions on
@@ -31,10 +31,8 @@ COPYRIGHT AND LICENCE
 
 Put the correct copyright and licence information here.
 
-Copyright (C) 2025 by neolite
+Copyright (C) 2025 by Sergey Kovalev
 
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself, either Perl version 5.30.0 or,
 at your option, any later version of Perl 5 you may have available.
-
-

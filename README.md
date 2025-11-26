@@ -1,10 +1,10 @@
-# JSON::Jsonnet
+# Jsonnet::XS
 
-[![CPAN version](https://badge.fury.io/pl/JSON-Jsonnet.svg)](https://metacpan.org/pod/JSON::Jsonnet)
-[![CPAN testers](https://cpantesters.org/distro/J/JSON-Jsonnet.svg)](https://cpantesters.org/distro/J/JSON-Jsonnet)
+[![CPAN version](https://badge.fury.io/pl/Jsonnet-XS.svg)](https://metacpan.org/pod/Jsonnet::XS)
+[![CPAN testers](https://cpantesters.org/distro/J/Jsonnet-XS.svg)](https://cpantesters.org/distro/J/Jsonnet-XS)
 [![License](https://img.shields.io/badge/license-Perl%205-blue.svg)](https://dev.perl.org/licenses/)
 [![Perl](https://img.shields.io/badge/perl-5.30%2B-blue.svg)](https://www.perl.org/)
-[![CI](https://github.com/neo1ite/JSON-Jsonnet/actions/workflows/ci.yml/badge.svg)](https://github.com/neo1ite/JSON-Jsonnet/actions/workflows/ci.yml)
+[![CI](https://github.com/neo1ite/Jsonnet-XS/actions/workflows/ci.yml/badge.svg)](https://github.com/neo1ite/Jsonnet-XS/actions/workflows/ci.yml)
 
 Perl XS bindings to **libjsonnet** (Google Jsonnet C/C++ API).
 
@@ -68,7 +68,7 @@ sudo ldconfig   # on Linux
 ### Standard CPAN install
 
 ```bash
-cpanm JSON::Jsonnet
+cpanm Jsonnet::XS
 ```
 
 ### If libjsonnet is in a non-standard prefix
@@ -76,7 +76,7 @@ cpanm JSON::Jsonnet
 Set `JSONNET_PREFIX` so the build can find headers and library:
 
 ```bash
-JSONNET_PREFIX=/opt/jsonnet cpanm JSON::Jsonnet
+JSONNET_PREFIX=/opt/jsonnet cpanm Jsonnet::XS
 ```
 
 or when building from the repo:
@@ -97,9 +97,9 @@ The build will also try `pkg-config libjsonnet` automatically when available.
 ### Basic evaluation
 
 ```perl
-use JSON::Jsonnet;
+use Jsonnet::XS;
 
-my $vm = JSON::Jsonnet->new(
+my $vm = Jsonnet::XS->new(
     ext_vars => { foo => "bar" },
 );
 
@@ -189,7 +189,7 @@ Return values can be scalars, arrayrefs, hashrefs, or undef.
 You can set tuning parameters either via constructor or later:
 
 ```perl
-my $vm = JSON::Jsonnet->new(
+my $vm = Jsonnet::XS->new(
     max_stack         => 1000,
     gc_min_objects    => 10,
     gc_growth_trigger => 2.5,
