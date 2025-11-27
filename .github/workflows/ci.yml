@@ -34,6 +34,10 @@ jobs:
             jsonnet \
             libjsonnet-dev
 
+      - name: Install configure deps
+        run: |
+          cpanm --notest Devel::CheckLib
+
       - name: Install Perl dependencies
         run: |
           cpanm --notest --installdeps .
