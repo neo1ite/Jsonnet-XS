@@ -39,12 +39,13 @@ jobs:
 
       - name: Build & install libjsonnet v0.21.0
         run: |
+          set -e
           JSONNET_TAG=v0.21.0
+          cd /tmp
           git clone --depth 1 --branch "$JSONNET_TAG" https://github.com/google/jsonnet.git
           cd jsonnet
           make -j"$(nproc)"
           sudo make install
-          # Чтобы рантайм точно увидел /usr/local/lib
           sudo ldconfig
 
       - name: Install configure deps
