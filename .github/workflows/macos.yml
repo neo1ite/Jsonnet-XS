@@ -32,7 +32,6 @@ jobs:
       
       - name: Prepare cpan
         run: |
-          openssl version
           cpan -M https://www.cpan.org -T App::cpanminus
           cpanm --notest  ${{ vars.EXTRA_CPANM_MODULES }} ${{ vars.MACOS_EXTRA_CPANM_MODULES }}
       - name: Install dependencies
@@ -41,7 +40,16 @@ jobs:
       # НЕ ставим libjsonnet-dev из apt (там 0.20.0)
       # - name: Install system dependencies (old jsonnet)
       #   run: sudo apt-get install -y jsonnet libjsonnet-dev
-
+      - name: Install configure deps
+        run: |
+          cpanm --notest \
+              Devel::CheckLib \
+              JSON::MaybeXS \
+              Test2::V0 \
+              Test::Pod \
+              Test::Pod::Coverage \
+              Test::CPAN::Meta
+              
       - name: Build & install libjsonnet v0.21.0
         run: |
           set -e
@@ -53,15 +61,7 @@ jobs:
           sudo make install
           sudo ldconfig
 
-      - name: Install configure deps
-        run: |
-          cpanm --notest \
-              Devel::CheckLib \
-              JSON::MaybeXS \
-              Test2::V0 \
-              Test::Pod \
-              Test::Pod::Coverage \
-              Test::CPAN::Meta
+      
 
       - name: Build
         run: |
