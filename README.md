@@ -246,6 +246,11 @@ make clean
 make
 make test
 ```
+# also can help:
+```bash
+cp libjsonnet.so.0 /usr/lib64/
+cp include/libjsonnet.h /usr/include/
+```
 
 ### Build cannot find `libjsonnet.h`
 
