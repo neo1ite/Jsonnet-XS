@@ -47,15 +47,9 @@ jobs:
               Test::Pod::Coverage \
               Test::CPAN::Meta
               
-      - name: Build & install libjsonnet v0.21.0
+      - name: Install libjsonnet v0.21.0
         run: |
-          set -e
-          JSONNET_TAG=v0.21.0
-          cd /tmp
-          git clone --depth 1 --branch "$JSONNET_TAG" https://github.com/google/jsonnet.git
-          cd jsonnet
-          make -j"$(nproc)"
-          sudo make install
+          brew install go-jsonnet
       
 
       - name: Build
