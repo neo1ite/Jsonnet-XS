@@ -49,7 +49,7 @@ jobs:
               
       - name: Install libjsonnet v0.21.0
         run: |
-          brew install go-jsonnet
+          brew install jsonnet
       
 
       - name: Build
