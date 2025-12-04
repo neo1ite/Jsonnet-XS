@@ -50,7 +50,7 @@ jobs:
       - name: Install libjsonnet v0.21.0
         run: |
           brew install jsonnet
-          tool -L /opt/homebrew/bin/jsonnet
+          otool -L /opt/homebrew/bin/jsonnet
           brew --prefix jsonnet
           find /opt/homebrew -name "*jsonnet*"
 
