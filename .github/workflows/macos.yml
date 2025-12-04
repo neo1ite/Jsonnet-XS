@@ -62,9 +62,10 @@ jobs:
           make -j"$(nproc)"
           sudo make install
           ls -la /tmp/jsonnet/
+          sed -i '' 's/cmake_minimum_required(VERSION 2.8\.7\.\.\.4\.0)/cmake_minimum_required(VERSION 3.5)/' CMakeLists.txt
           mkdir build
           cd build
-          cmake -DCMAKE_POLICY_VERSION_MINIMUM=3.5 ..
+          cmake ..
           make
           ls -la /tmp/jsonnet/build/
 
