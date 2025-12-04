@@ -52,8 +52,10 @@ jobs:
           brew install jsonnet
           ls -la /opt/homebrew/Cellar/jsonnet/0.21.0/
           find /opt/homebrew/Cellar/jsonnet/0.21.0 -name "*.h" -o -name "*.dylib"
-          ls -la /opt/homebrew/include/jsonnet*
-          ls -la /opt/homebrew/lib/libjsonnet.*
+          find /opt/homebrew/ -name "*.h" -o -name "*.dylib"
+          find /opt/ -name "*jsonnet*.h" -o -name "*jsonnet*.dylib"
+
+
 
       #- name: Build
       #  run: |
