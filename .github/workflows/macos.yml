@@ -60,6 +60,11 @@ jobs:
           make -j"$(nproc)"
           sudo make install
           ls -la /tmp/jsonnet/
+          mkdir build
+          cd build
+          cmake ..
+          make
+          ls -la /tmp/jsonnet/build/
 
 
       #- name: Build
