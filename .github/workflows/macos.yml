@@ -52,10 +52,14 @@ jobs:
           brew update --verbose
           brew update-reset
           brew cleanup
-          brew install jsonnet
-          ls -la /opt/homebrew/Cellar/jsonnet/0.21.0/
-          sudo find /opt -name "libjsonnet.h"
-          sudo find /opt -name "libjsonnet.dylib"
+          set -e
+          JSONNET_TAG=v0.21.0
+          cd /tmp
+          git clone --depth 1 --branch "$JSONNET_TAG" https://github.com/google/jsonnet.git
+          cd jsonnet
+          make -j"$(nproc)"
+          sudo make install
+          ls -la /tmp/jsonnet/
 
 
       #- name: Build
