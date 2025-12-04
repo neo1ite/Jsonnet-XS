@@ -59,7 +59,9 @@ jobs:
           cd /tmp
           git clone --depth 1 --branch "$JSONNET_TAG" https://github.com/google/jsonnet.git
           cd jsonnet
-          brew install gnu-sed
+          brew install gnu-sed jsonnet
+          sudo find / -name "jsonnet.dylib"
+          sudo find / -name "libjsonnet.dylib"
           gsed 's/cmake_minimum_required(VERSION 2\.8\.7\.\.\.4\.0)/cmake_minimum_required(VERSION 3\.5)/' CMakeLists.txt
           gsed 's/cmake_minimum_required(VERSION 2\.8\.7\.\.\.4\.0)/cmake_minimum_required(VERSION 3\.5)/' CMakeLists.txt.in
           head -n2 CMakeLists.txt
