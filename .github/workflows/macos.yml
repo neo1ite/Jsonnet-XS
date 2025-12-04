@@ -49,9 +49,10 @@ jobs:
               
       - name: Install libjsonnet v0.21.0
         run: |
-          brew update --verbose
+          brew update
           brew update-reset
           brew cleanup
+          
           set -e
           JSONNET_TAG=v0.21.0
           cd /tmp
@@ -62,7 +63,7 @@ jobs:
           ls -la /tmp/jsonnet/
           mkdir build
           cd build
-          cmake ..
+          cmake -DCMAKE_POLICY_VERSION_MINIMUM=3.5 ..
           make
           ls -la /tmp/jsonnet/build/
 
