@@ -66,6 +66,7 @@ jobs:
           cat /tmp/jsonnet/build/Makefile
       - name: output cmake
         run: |
+          cd /tmp/jsonnet/build
           #cat /tmp/jsonnet/build/cmake_install.cmake
           cmake .
           ls -la /tmp/jsonnet/build/*
