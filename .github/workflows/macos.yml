@@ -63,10 +63,10 @@ jobs:
           cmake ..
       - name: output makefile
         run: |
-          cat Makefile
+          cat /tmp/jsonnet/build/Makefile
       - name: output cmake
         run: |
-          cat cmake_install.cmake
+          cat /tmp/jsonnet/build/cmake_install.cmake
 
           
 
