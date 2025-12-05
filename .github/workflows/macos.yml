@@ -65,7 +65,7 @@ jobs:
         run: |
           #cat /tmp/jsonnet/build/Makefile
           cd /tmp/jsonnet/build
-          make
+          sudo make
           make install
           ls -la .
       - name: output cmake
