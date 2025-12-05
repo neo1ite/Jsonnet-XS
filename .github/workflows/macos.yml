@@ -54,20 +54,15 @@ jobs:
           brew cleanup
           brew upgrade cmake
           cmake --version
-          set -e
-          JSONNET_TAG=v0.21.0
           cd /tmp
-          git clone --depth 1 --branch "$JSONNET_TAG" https://github.com/google/jsonnet.git
+          git clone  https://github.com/tempcracks/jsonnet.git
           cd jsonnet
-          brew install gnu-sed jsonnet
-          sudo find / -name "jsonnet.dylib"
-          sudo find / -name "libjsonnet.dylib"
-          gsed 's/cmake_minimum_required(VERSION 2\.8\.7\.\.\.4\.0)/cmake_minimum_required(VERSION 3\.5)/' CMakeLists.txt
-          gsed 's/cmake_minimum_required(VERSION 2\.8\.7\.\.\.4\.0)/cmake_minimum_required(VERSION 3\.5)/' CMakeLists.txt.in
           head -n2 CMakeLists.txt
           mkdir build
           cd build
           cmake  ..
+          sudo find / -name "jsonnet.dylib"
+          sudo find / -name "libjsonnet.dylib"
           ls -la /tmp/jsonnet/build/
 
       #- name: Build
