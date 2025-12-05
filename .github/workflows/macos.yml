@@ -65,7 +65,7 @@ jobs:
         run: |
           #cat /tmp/jsonnet/build/Makefile
           cd /tmp/jsonnet/build
-          sudo make
+          make
           sudo make install
           ls -la .
 
@@ -73,7 +73,9 @@ jobs:
 
       - name: Build
         run: |
+          export LIBRARY_PATH="/usr/local/lib:$LIBRARY_PATH"
           export DYLD_LIBRARY_PATH="/usr/local/lib:$DYLD_LIBRARY_PATH"
+          export CPATH="/usr/local/include:$CPATH"
           perl Makefile.PL
           make
 
