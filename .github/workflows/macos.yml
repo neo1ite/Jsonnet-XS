@@ -63,7 +63,6 @@ jobs:
           ls -la
           sudo find /tmp/jsonnet -name "jsonnet.dylib"
           sudo find /tmp/jsonnet -name "libjsonnet.dylib"
-          
           ls -la /tmp/jsonnet/build/
 
       #- name: Build
