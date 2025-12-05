@@ -61,11 +61,13 @@ jobs:
           mkdir build
           cd build
           cmake ..
-          sudo find /tmp/jsonnet -name "jsonnet.h"
-          sudo find /tmp/jsonnet -name "libjsonnet.dylib"
-          ls -la /tmp/jsonnet/build/*
-          cd ..
-          cmake --build build --target run_tests
+      - name: output makefile
+        run: |
+          cat Makefile
+      - name: output cmake
+        run: |
+          cat cmake_install.cmake
+
           
 
       #- name: Build
